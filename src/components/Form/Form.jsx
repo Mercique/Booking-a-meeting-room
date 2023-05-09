@@ -1,5 +1,6 @@
+import { CalendarPicker } from "../CalendarPicker/CalendarPicker";
 import { FormDropdown } from "../FormDropdown/FormDropdown";
-import style from "./Form.module.scss";
+import styles from "./Form.module.scss";
 import { useState } from "react";
 
 export const Form = ({ bookingInfo }) => {
@@ -8,9 +9,27 @@ export const Form = ({ bookingInfo }) => {
   }, {});
 
   const [place, setPlace] = useState(placeObj);
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState(new Date());
   const [textarea, setTextarea] = useState("");
   const [open, setOpen] = useState("");
+
+  const getDate = (date) => {
+    const paymentDate = new Date(date);
+
+    const editDate = {
+      year: paymentDate.getFullYear(),
+      month:
+        paymentDate.getMonth() < 10
+          ? "0" + (paymentDate.getMonth() + 1)
+          : paymentDate.getMonth() + 1,
+      day:
+        paymentDate.getDate() < 10
+          ? "0" + paymentDate.getDate()
+          : paymentDate.getDate(),
+    };
+
+    return `${editDate.year}-${editDate.month}-${editDate.day}`;
+  };
 
   const getElement = (el) => {
     setPlace((prevState) => ({ ...prevState, [open]: el }));
@@ -30,7 +49,7 @@ export const Form = ({ bookingInfo }) => {
 
     const json = {
       ...place,
-      date,
+      date: `${getDate(date)}T${date.toLocaleTimeString()}`,
       textarea,
     };
 
@@ -40,16 +59,17 @@ export const Form = ({ bookingInfo }) => {
 
   const handleClear = () => {
     setPlace(placeObj);
-    setDate("");
+    setDate(new Date());
     setTextarea("");
     setOpen("");
   };
 
   return (
-    <form className={style.form} onSubmit={handleSubmit}>
+    <form className={styles.form} onSubmit={handleSubmit}>
+      <h1 className={styles.formTitle}>Бронирование переговорной</h1>
       {Object.keys(bookingInfo).map((item, idx) => (
         <div
-          className={style.formSelect}
+          className={styles.formSelect}
           key={idx}
           onClick={() => handleItem(item)}
         >
@@ -61,25 +81,28 @@ export const Form = ({ bookingInfo }) => {
           />
         </div>
       ))}
-      <input
-        type="date"
-        value={date}
-        onChange={(e) => setDate(e.target.value)}
-      />
+      <div>
+        <CalendarPicker startDate={date} setStartDate={setDate} />
+      </div>
       <textarea
         value={textarea}
         onChange={(e) => setTextarea(e.target.value)}
         placeholder="Введите комментарий:"
       ></textarea>
-      <div className={style.formButtons}>
+      <div className={styles.formButtons}>
+        <span className={styles.formRule}>- обязательно выбрать!</span>
         <button
           type="submit"
-          className={style.formSubmit}
-          disabled={!date | !textarea | Object.values(place).includes("")}
+          className={styles.formSubmit}
+          disabled={!date | Object.values(place).includes("")}
         >
           Отправить
         </button>
-        <button type="button" className={style.formClear} onClick={handleClear}>
+        <button
+          type="button"
+          className={styles.formClear}
+          onClick={handleClear}
+        >
           Очистить
         </button>
       </div>

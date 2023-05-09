@@ -4,4 +4,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  user-select: none;
+  color: #C8C8D2;
+  background: #0F1022;
+}
+
+button {
+  cursor: pointer;
+  &:disabled {
+    cursor: not-allowed;
+  }
 }

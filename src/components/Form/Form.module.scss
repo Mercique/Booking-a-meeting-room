@@ -1,17 +1,28 @@
 .form {
-  width: 218px;
+  width: 280px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 25px;
+  padding: 0 20px 60px;
+  background: linear-gradient(161.19deg, #383745 0%, #161525 73.97%, #161525 73.97%);
+  box-shadow: -2px -1px 2px rgba(255, 255, 255, 0.45), 14px 14px 0px #0A0B1F;
+  border-radius: 8px;
 }
 
-.form > * {
-  height: 35px;
+.formTitle {
+  padding: 20px 0;
+  line-height: 30px;
+  text-align: center;
 }
 
 .formSelect {
+  height: 35px;
   position: relative;
-  border: 1px solid #000;
+  padding-top: 7px;
+  padding-left: 10px;
+  cursor: pointer;
+  background: linear-gradient(91.16deg, #5A5A64 4.65%, #52525E 86.45%);
+  border-radius: 8px;
 }
 
 .formText {
@@ -20,7 +31,55 @@
   height: 100%;
 }
 
+textarea {
+  height: 35px;
+  max-height: 200px;
+  padding: 6px 8px;
+  font-size: 17px;
+  color: #C8C8D2;
+  background: linear-gradient(91.16deg, #5A5A64 4.65%, #52525E 86.45%);
+  border-radius: 8px;
+  &::placeholder {
+    color: inherit;
+  }
+}
+
 .formButtons {
+  position: relative;
   display: flex;
   justify-content: space-between;
+  background: transparent;
+  span {
+    position: absolute;
+    top: -23px;
+    left: 0;
+    &::before {
+      content: "*";
+      color: #f00;
+    }
+  }
+}
+
+.formSubmit, .formClear {
+  padding: 5px 10px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  text-align: center;
+  color: #C8C8D2;
+  border: none;
+  background: #52525e;
+  border-radius: 8px;
+  transition: background .2s ease;
+  &:disabled {
+    opacity: .5;
+  }
+  &:not(:disabled):hover {
+    background: #5b5b7c;
+  }
+  &:not(:disabled):active {
+    background: #222234;
+    transform: translateY(1px);
+  }
 }

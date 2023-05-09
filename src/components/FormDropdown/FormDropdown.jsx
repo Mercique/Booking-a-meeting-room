@@ -1,4 +1,4 @@
-import style from "./FormDropdown.module.scss";
+import styles from "./FormDropdown.module.scss";
 
 export const FormDropdown = ({ place, bookingInfo, getElement, showMenu }) => {
   const handleChooseElement = (e, el) => {
@@ -8,14 +8,15 @@ export const FormDropdown = ({ place, bookingInfo, getElement, showMenu }) => {
 
   return (
     <>
-      <span className={style.formText}>
-        {place?.value === "" ? `Choose a ${place?.key}` : place.value}
+      <span className={styles.formLabel}>{`Choose a ${place?.key}:`}</span>
+      <span className={styles.formInput}>
+        {place?.value === "" ? `---` : place?.value}
       </span>
       {showMenu && (
-        <ul className={style.dropdownMenu}>
+        <ul className={styles.dropdownMenu}>
           {bookingInfo.map((item, idx) => (
             <li
-              className={style.dropdownMenuItem}
+              className={styles.dropdownMenuItem}
               key={idx}
               onClick={(e) => handleChooseElement(e, item)}
             >
