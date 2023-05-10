@@ -13,6 +13,7 @@ export const CalendarPicker = ({ startDate, setStartDate }) => {
       timeCaption="time"
       dateFormat="MMMM d, yyyy h:mm aa"
       className={styles.calendar}
+      placeholderText="Дата не выбрана!"
     />
   );
 };

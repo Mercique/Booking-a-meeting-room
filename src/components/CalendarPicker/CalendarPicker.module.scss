@@ -8,4 +8,7 @@
   border: none;
   color: #C8C8D2;
   background: linear-gradient(91.16deg, #5A5A64 4.65%, #52525E 86.45%);
+  &::placeholder {
+    color: #C8C8D2;
+  }
 }

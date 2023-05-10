@@ -2,7 +2,7 @@
   width: 280px;
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 20px;
   padding: 0 20px 60px;
   background: linear-gradient(161.19deg, #383745 0%, #161525 73.97%, #161525 73.97%);
   box-shadow: -2px -1px 2px rgba(255, 255, 255, 0.45), 14px 14px 0px #0A0B1F;
@@ -31,6 +31,16 @@
   height: 100%;
 }
 
+.formLabel, .calendarPickerLabel {
+  display: block;
+  margin-bottom: 3px;
+  cursor: default;
+  &::before {
+    content: "*";
+    color: #f00;
+  }
+}
+
 textarea {
   height: 35px;
   max-height: 200px;
@@ -49,15 +59,11 @@ textarea {
   display: flex;
   justify-content: space-between;
   background: transparent;
-  span {
-    position: absolute;
-    top: -23px;
-    left: 0;
-    &::before {
-      content: "*";
-      color: #f00;
-    }
-  }
+}
+
+.formRule::before {
+  content: "*";
+  color: #f00;
 }
 
 .formSubmit, .formClear {

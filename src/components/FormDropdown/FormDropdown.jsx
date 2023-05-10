@@ -8,7 +8,6 @@ export const FormDropdown = ({ place, bookingInfo, getElement, showMenu }) => {
 
   return (
     <>
-      <span className={styles.formLabel}>{`Choose a ${place?.key}:`}</span>
       <span className={styles.formInput}>
         {place?.value === "" ? `---` : place?.value}
       </span>

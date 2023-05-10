@@ -9,7 +9,7 @@ export const Form = ({ bookingInfo }) => {
   }, {});
 
   const [place, setPlace] = useState(placeObj);
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState("");
   const [textarea, setTextarea] = useState("");
   const [open, setOpen] = useState("");
 
@@ -59,7 +59,7 @@ export const Form = ({ bookingInfo }) => {
 
   const handleClear = () => {
     setPlace(placeObj);
-    setDate(new Date());
+    setDate();
     setTextarea("");
     setOpen("");
   };
@@ -68,20 +68,23 @@ export const Form = ({ bookingInfo }) => {
     <form className={styles.form} onSubmit={handleSubmit}>
       <h1 className={styles.formTitle}>Бронирование переговорной</h1>
       {Object.keys(bookingInfo).map((item, idx) => (
-        <div
-          className={styles.formSelect}
-          key={idx}
-          onClick={() => handleItem(item)}
-        >
-          <FormDropdown
-            place={{ key: item, value: place[item] }}
-            bookingInfo={bookingInfo[item]}
-            getElement={getElement}
-            showMenu={open === item}
-          />
+        <div key={idx}>
+          <span className={styles.formLabel}>{bookingInfo[item]?.name}:</span>
+          <div
+            className={styles.formSelect}
+            onClick={() => handleItem(item)}
+          >
+            <FormDropdown
+              place={{ key: item, value: place[item] }}
+              bookingInfo={bookingInfo[item]?.value}
+              getElement={getElement}
+              showMenu={open === item}
+            />
+          </div>
         </div>
       ))}
       <div>
+        <span className={styles.calendarPickerLabel}>Выбрать дату:</span>
         <CalendarPicker startDate={date} setStartDate={setDate} />
       </div>
       <textarea
@@ -89,8 +92,8 @@ export const Form = ({ bookingInfo }) => {
         onChange={(e) => setTextarea(e.target.value)}
         placeholder="Введите комментарий:"
       ></textarea>
+      <span className={styles.formRule}>- обязательно выбрать!</span>
       <div className={styles.formButtons}>
-        <span className={styles.formRule}>- обязательно выбрать!</span>
         <button
           type="submit"
           className={styles.formSubmit}
